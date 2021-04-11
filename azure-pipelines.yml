@@ -10,4 +10,39 @@ variables:
     certSecureFile: 'rpgmv.p12'
     certPwd: $(baka)
     keychain: 'temp'
-    deleteCert: true
+    deleteCert: 
+- task: InstallAppleProvisioningProfile@1
+  inputs:
+    provProfileSecureFile: 'app.mobileprovision'
+    removeProfile: true
+- task: Xcode@5
+  inputs:
+    actions: 'build'
+    scheme: '$(scheme)'
+    sdk: '$(ipados)'
+    configuration: '$(Release)'
+    xcWorkspacePath: '**/*.xcodeproj/project.xcworkspace'
+    xcodeVersion: 'default'
+    signingOption: 'manual'
+    signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
+    provisioningProfileUuid: '$(APPLE_PROV_PROFILE_UUID)'
+    packageApp: true
+- task: CopyFiles@2
+  inputs:
+    contents: '**/*.ipa'
+    targetFolder: '$(build.artifactStagingDirectory)'
+    overWrite: true
+    flattenFolders: true
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(build.artifactStagingDirectory)'
+    artifactName: 'drop'
+    publishLocation: 'Container'
+- task: AppStoreRelease@1
+  displayName: 'Publish to the App Store TestFlight track'
+  inputs:
+    serviceEndpoint: 'appleStoreServiceConnection'
+    appIdentifier: com.fxzd.dasz
+    ipaPath: '$(build.artifactstagingdirectory)/**/*.ipa'
+    shouldSkipWaitingForProcessing: true
+    shouldSkipSubmission: true
