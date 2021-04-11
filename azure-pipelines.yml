@@ -5,6 +5,9 @@
     sdk: '$(ipados)'
     packageApp: true
     exportPath: 'output/$(ipados)/$(Release)'
+    exportOptions: 'specify'
+    exportMethod: 'development'
+    exportTeamId: 'RPGMakerMV'
     destinationPlatformOption: 'iOS'
     destinationSimulators: 'iPad Air 2,OS=14.4.1'
 - task: InstallAppleCertificate@2
