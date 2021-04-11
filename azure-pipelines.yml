@@ -1,14 +1,9 @@
-# Xcode
 - task: Xcode@5
   inputs:
     actions: 'build'
     configuration: '$(Release)'
     sdk: '$(ipados)'
-    xcodeVersion: '12'
     packageApp: true
     exportPath: 'output/$(ipados)/$(Release)'
     destinationPlatformOption: 'iOS'
-    destinationSimulators: 'iPad Air 2, OS=14.4.1'
-# Build, test, and archive an Xcode workspace on macOS.
-# Add steps that install certificates, test, sign, and distribute an app, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/xcode
+    destinationSimulators: 'iPad Air 2,OS=14.4.1'
