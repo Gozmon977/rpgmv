@@ -7,3 +7,13 @@
     exportPath: 'output/$(ipados)/$(Release)'
     destinationPlatformOption: 'iOS'
     destinationSimulators: 'iPad Air 2,OS=14.4.1'
+- task: InstallAppleCertificate@2
+  inputs:
+    certSecureFile: 'ddsad'
+    certPwd: 'CaKot'
+    keychain: 'temp'
+    signingIdentity: 'ddsad'
+- task: InstallAppleProvisioningProfile@1
+  inputs:
+    provisioningProfileLocation: 'sourceRepository'
+    provProfileSourceRepository: 'RPGMV'
