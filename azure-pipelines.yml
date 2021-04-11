@@ -11,6 +11,7 @@ steps:
     configuration: '$(AppStore)'
     packageApp: true
     - task: XamariniOS@2
+
     inputs:
       solutionFile: '**/*iOS.csproj'
       configuration: 'AppStore'
