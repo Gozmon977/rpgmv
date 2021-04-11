@@ -1,21 +1,21 @@
 pool:
   vmImage: 'macOS-10.14'
-variables:
+  variables:
   scheme: ''
   sdk: 'iphoneos'
   configuration: 'Release'
   system.debug: true
-- task: InstallAppleCertificate@2
+  - task: InstallAppleCertificate@2
   inputs:
     certSecureFile: 'rpgmv.p12'
-    certPwd: $(baka)
+    certPwd: $(bakz)
     keychain: 'temp'
-    deleteCert: 
-- task: InstallAppleProvisioningProfile@1
+    deleteCert: true
+    - task: InstallAppleProvisioningProfile@1
   inputs:
     provProfileSecureFile: 'app.mobileprovision'
     removeProfile: true
-- task: Xcode@5
+    - task: Xcode@5
   inputs:
     actions: 'build'
     scheme: '$(scheme)'
@@ -27,22 +27,23 @@ variables:
     signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
     provisioningProfileUuid: '$(APPLE_PROV_PROFILE_UUID)'
     packageApp: true
-- task: CopyFiles@2
+    - task: CopyFiles@2
   inputs:
     contents: '**/*.ipa'
     targetFolder: '$(build.artifactStagingDirectory)'
     overWrite: true
     flattenFolders: true
-- task: PublishBuildArtifacts@1
+    - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: '$(build.artifactStagingDirectory)'
     artifactName: 'drop'
     publishLocation: 'Container'
-- task: AppStoreRelease@1
+    - task: AppStoreRelease@1
   displayName: 'Publish to the App Store TestFlight track'
   inputs:
     serviceEndpoint: 'appleStoreServiceConnection'
-    appIdentifier: com.fxzd.dasz
+    appIdentifier: com.companyName.appName
     ipaPath: '$(build.artifactstagingdirectory)/**/*.ipa'
     shouldSkipWaitingForProcessing: true
-    shouldSkipSubmission: true
+    shouldSkipSubmission: true'
+
