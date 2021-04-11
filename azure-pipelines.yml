@@ -1,1 +1,12 @@
-dsadasd
+# Xcode Package iOS
+# Generate an .ipa file from Xcode build output using xcrun (Xcode 7 or below)
+- task: XcodePackageiOS@0
+  inputs:
+    appName: 'szxc.app'
+    ipaName: 'rpgmv.ipa'
+    sdk: 'iphoneos'
+    appPath: '$(iphoneos)/$(Release)/build.sym/$(Release)-$(iphoneos)'
+    ipaPath: '$(iphoneos)/$(Release)/build.sym/$(Release)-$(iphoneos)/output'
+    #sdk: 'iphoneos' 
+    #appPath: '$(SDK)/$(Configuration)/build.sym/$(Configuration)-$(SDK)' 
+    #ipaPath: '$(SDK)/$(Configuration)/build.sym/$(Configuration)-$(SDK)/output' 
