@@ -1,1 +1,13 @@
-a
+pool:
+  vmImage: 'macOS-10.14'
+variables:
+  scheme: ''
+  sdk: 'iphoneos'
+  configuration: 'Release'
+  system.debug: true
+- task: InstallAppleCertificate@2
+  inputs:
+    certSecureFile: 'rpgmv.p12'
+    certPwd: $(baka)
+    keychain: 'temp'
+    deleteCert: true
